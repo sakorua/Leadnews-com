@@ -21,6 +21,7 @@ import com.heima.model.wemedia.pojos.WmUser;
 import com.heima.user.mapper.ApUserMapper;
 import com.heima.user.mapper.ApUserRealnameMapper;
 import com.heima.user.service.ApUserRealnameService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,8 @@ public class ApUserRealnameServiceImpl extends ServiceImpl<ApUserRealnameMapper,
         return new PageResponseResult(dto.getPage(), dto.getSize(), iPage.getTotal(), iPage.getRecords());
     }
 
+
+    @GlobalTransactional(rollbackFor = Exception.class)
     @Override
     public ResponseResult updateStatusById(AuthDTO dto, Short status) {
 

@@ -4,8 +4,11 @@ import com.heima.admin.service.ChannelService;
 import com.heima.model.admin.dtos.ChannelDTO;
 import com.heima.model.admin.pojos.AdChannel;
 import com.heima.model.common.dtos.ResponseResult;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author SaKoRua
@@ -38,5 +41,12 @@ public class ChannelController {
     @GetMapping("del/{id}")
     ResponseResult delete(@PathVariable("id") Integer id) {
         return channelService.deleteById(id);
+    }
+
+    @ApiOperation("查询全部频道")
+    @GetMapping("/channels")
+    public ResponseResult findAll() {
+        List<AdChannel> list = channelService.list();
+        return ResponseResult.okResult(list);
     }
 }
